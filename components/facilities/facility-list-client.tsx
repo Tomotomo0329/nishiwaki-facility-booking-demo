@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 
 import { ActiveFilterChips, type ActiveFilterChip } from "@/components/facilities/active-filter-chips";
 import { FacilityListCard } from "@/components/facilities/facility-list-card";
+import { FilterModalButton } from "@/components/facilities/filter-modal-button";
 import { FilterSidebar } from "@/components/facilities/filter-sidebar";
 import type { FilterOption } from "@/components/facilities/filter-checkbox-group";
 import { MapViewPlaceholder } from "@/components/facilities/map-view-placeholder";
@@ -197,6 +198,25 @@ export function FacilityListClient({
       />
 
       <section className="w-full min-w-0 flex-1">
+        <FilterModalButton
+          resultCount={sorted.length}
+          activeFilterCount={chips.length}
+          categoryOptions={categoryOptions}
+          selectedCategories={selectedCategories}
+          onToggleCategory={(v) => setSelectedCategories((prev) => toggle(prev, v))}
+          areaOptions={areaOptions}
+          selectedAreas={selectedAreas}
+          onToggleArea={(v) => setSelectedAreas((prev) => toggle(prev, v))}
+          amenityOptions={amenityOptions}
+          selectedAmenities={selectedAmenities}
+          onToggleAmenity={(v) => setSelectedAmenities((prev) => toggle(prev, v))}
+          capacityMin={capacityMin}
+          capacityMax={capacityMax}
+          capacityValue={capacityValue}
+          onCapacityChange={setCapacityValue}
+          onReset={handleReset}
+        />
+
         <ResultsToolbar
           count={sorted.length}
           sortValue={sortValue}
