@@ -6,7 +6,7 @@ import { SlidersHorizontal } from "lucide-react";
 import { FilterFields, type FilterFieldsProps } from "@/components/facilities/filter-sidebar";
 import { Modal } from "@/components/ui/modal";
 
-/** スマホ向け：検索条件をアイコン付きボタン＋モーダルで開閉する（タブレット以上では非表示） */
+/** スマホ・タブレット向け：検索条件をアイコン付きボタン＋モーダルで開閉する（PCでは非表示） */
 export function FilterModalButton({
   resultCount,
   activeFilterCount,
@@ -18,7 +18,7 @@ export function FilterModalButton({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="mb-space-md md:hidden">
+    <div className="mb-space-md lg:hidden">
       <button
         type="button"
         onClick={() => setOpen(true)}

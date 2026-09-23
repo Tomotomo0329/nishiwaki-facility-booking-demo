@@ -29,13 +29,13 @@ export function HeroSearchForm() {
 
   return (
     <div className="w-full text-left rounded-xl bg-surface border border-line shadow-[var(--shadow-raised)] p-space-md md:p-space-lg">
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-12 gap-space-md items-end">
-        <Field className="md:col-span-3" label="利用日" required htmlFor="date">
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-12 gap-space-md items-end">
+        <Field className="sm:col-span-1 xl:col-span-3" label="利用日" required htmlFor="date">
           <CalendarDays aria-hidden className="absolute left-3 z-10 size-5 text-ink-muted pointer-events-none" />
           <DatePickerPopover id="date" value={date} onChange={setDate} minDate={DEMO_TODAY} />
         </Field>
 
-        <Field className="md:col-span-3" label="目的" htmlFor="purpose">
+        <Field className="sm:col-span-1 xl:col-span-3" label="目的" htmlFor="purpose">
           <Trophy aria-hidden className="absolute left-3 size-5 text-ink-muted pointer-events-none" />
           <select
             id="purpose"
@@ -49,7 +49,7 @@ export function HeroSearchForm() {
           </select>
         </Field>
 
-        <Field className="md:col-span-3" label="エリア" htmlFor="area">
+        <Field className="sm:col-span-1 xl:col-span-3" label="エリア" htmlFor="area">
           <MapPin aria-hidden className="absolute left-3 size-5 text-ink-muted pointer-events-none" />
           <select
             id="area"
@@ -63,12 +63,12 @@ export function HeroSearchForm() {
           </select>
         </Field>
 
-        <div className="md:col-span-3">
+        <div className="sm:col-span-1 xl:col-span-3">
           <button
             type="submit"
-            className="w-full min-h-[48px] px-5 py-2.5 rounded-lg bg-primary text-on-primary text-body-bold flex items-center justify-center gap-2 hover:bg-primary-hover transition-colors shadow-[var(--shadow-card)]"
+            className="w-full min-h-[48px] px-5 py-2.5 rounded-lg bg-primary text-on-primary text-caption-bold xl:text-body-bold flex items-center justify-center gap-2 whitespace-nowrap hover:bg-primary-hover transition-colors shadow-[var(--shadow-card)]"
           >
-            <Search aria-hidden className="size-5" />
+            <Search aria-hidden className="size-5 shrink-0" />
             空きをさがす
           </button>
         </div>

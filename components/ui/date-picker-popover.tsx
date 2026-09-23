@@ -86,7 +86,7 @@ export function DatePickerPopover({
         <button
           type="button"
           id={id}
-          className="w-full min-h-[48px] pl-10 pr-3 py-2.5 rounded-lg bg-surface border border-line text-body text-ink text-left cursor-pointer hover:bg-canvas transition-colors"
+          className="w-full min-h-[48px] pl-10 pr-3 py-2.5 rounded-lg bg-surface border border-line text-caption xl:text-body text-ink text-left whitespace-nowrap overflow-hidden text-ellipsis cursor-pointer hover:bg-canvas transition-colors"
         >
           {formatJpDateWithYear(value)}
         </button>

@@ -103,10 +103,10 @@ export function FilterFields({
   );
 }
 
-/** 施設一覧 左カラムの検索条件パネル（タブレット以上でのみ表示。スマホでは FilterModalButton を使う） */
+/** 施設一覧 左カラムの検索条件パネル（PCでのみ表示。スマホ・タブレットでは FilterModalButton を使う） */
 export function FilterSidebar(props: FilterFieldsProps) {
   return (
-    <aside className="hidden w-full shrink-0 md:block lg:sticky lg:top-[88px] lg:w-[280px]">
+    <aside className="hidden w-full shrink-0 lg:sticky lg:top-[88px] lg:block lg:w-[280px]">
       <div className="rounded-xl bg-surface p-space-md shadow-[var(--shadow-card)]">
         <FilterFields {...props} />
       </div>
