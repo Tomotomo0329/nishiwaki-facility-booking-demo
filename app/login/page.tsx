@@ -84,7 +84,7 @@ export default async function LoginPage({
             </div>
           </div>
 
-          {/* デモ表示（開発方針 §0） */}
+          {/* デモ表示（開発方針 §0）*/}
           <p className="mt-space-md rounded-lg border border-dashed border-primary/40 bg-primary-surface px-4 py-3 text-caption text-primary">
             これはデモです。実際の認証は行いません。入力形式さえ正しければ、どの値でもログインできます。
           </p>
