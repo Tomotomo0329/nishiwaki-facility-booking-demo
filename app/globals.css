@@ -1,26 +1,157 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ==========================================================================
+   Banshu Indigo Reservation Design System
+   西脇市公共施設予約システム / デザイントークン
+
+   出典: Stitch デザインシステム design.md
+   Stitch が出力した HTML には Material 系パレット (primary: #00224e) が
+   埋め込まれているが、それは Stitch 内部のテーマであり設計意図ではない。
+   播州織の藍 #16386B を正とする。
+   ========================================================================== */
+
+@theme {
+  /* --- Color: Primary (播州織の藍) --- */
+  --color-primary: #16386b;
+  --color-primary-hover: #0f2a52;
+  --color-primary-surface: #eef2f9;
+  --color-on-primary: #ffffff;
+
+  /* --- Color: Canvas & Structure --- */
+  --color-canvas: #fafaf9;
+  --color-surface: #ffffff;
+  --color-line: #e4e4e7;
+
+  /* --- Color: Text ---
+     JIS X 8341-3 AA 準拠。ink-muted (#52525B) より薄い文字色は使わない。 */
+  --color-ink: #1c1917;
+  --color-ink-muted: #52525b;
+  --color-ink-subtle: #71717a; /* プレースホルダ専用 */
+
+  /* --- Color: Status ---
+     色のみに依存させない。必ず記号 (●▲×) とテキストを併用する。 */
+  --color-ok: #0f7b55;
+  --color-ok-surface: #ecfdf5;
+  --color-ok-line: #a7f3d0;
+
+  --color-warn: #b45309;
+  --color-warn-surface: #fffbeb;
+  --color-warn-line: #fde68a;
+
+  --color-full: #71717a;
+  --color-full-surface: #f4f4f5;
+  --color-full-line: #e4e4e7;
+
+  --color-danger: #b91c1c;
+  --color-danger-surface: #fef2f2;
+  --color-danger-line: #fecaca;
+
+  /* --- Typography ---
+     和文 Noto Sans JP / 数字・時刻・金額 Inter (tabular)
+     本文は 16px / 行間 1.7 を下回らない。 */
+  --font-sans: "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN",
+    "Yu Gothic UI", "Yu Gothic", Meiryo, system-ui, sans-serif;
+  --font-numeric: Inter, "Segoe UI Variable Text", "Segoe UI", system-ui,
+    sans-serif;
+
+  --text-h1: 2rem; /* 32px */
+  --text-h1--line-height: 1.4;
+  --text-h1--font-weight: 700;
+  --text-h1--letter-spacing: -0.01em;
+
+  --text-h1-mobile: 1.625rem; /* 26px */
+  --text-h1-mobile--line-height: 1.4;
+  --text-h1-mobile--font-weight: 700;
+  --text-h1-mobile--letter-spacing: -0.01em;
+
+  --text-h2: 1.5rem; /* 24px */
+  --text-h2--line-height: 1.45;
+  --text-h2--font-weight: 700;
+
+  --text-h3: 1.125rem; /* 18px */
+  --text-h3--line-height: 1.5;
+  --text-h3--font-weight: 700;
+
+  --text-lead: 1.125rem; /* 18px */
+  --text-lead--line-height: 1.7;
+  --text-lead--letter-spacing: 0.01em;
+
+  --text-body: 1rem; /* 16px */
+  --text-body--line-height: 1.7;
+  --text-body--letter-spacing: 0.01em;
+
+  --text-body-bold: 1rem;
+  --text-body-bold--line-height: 1.7;
+  --text-body-bold--font-weight: 700;
+  --text-body-bold--letter-spacing: 0.01em;
+
+  --text-caption: 0.875rem; /* 14px */
+  --text-caption--line-height: 1.6;
+  --text-caption--letter-spacing: 0.02em;
+
+  --text-caption-bold: 0.875rem;
+  --text-caption-bold--line-height: 1.6;
+  --text-caption-bold--font-weight: 700;
+  --text-caption-bold--letter-spacing: 0.02em;
+
+  /* --- Spacing ---
+     4px / 8px の倍数。gutter はグリッドの溝。
+
+     ★ 名前に必ず space- を付ける（p-space-md のように使う）。
+       xs / sm / md / lg / xl という裸の名前にしてはいけない。
+       Tailwind の max-w-* や w-* は「Tシャツサイズ名」を
+       --container-* と --spacing-* の両方から解決するため、
+       --spacing-xl を定義すると max-w-xl が --container-xl(36rem) ではなく
+       --spacing-xl(2rem) を拾い、要素が無言で潰れる。
+       design.md と Stitch の出力も space-* を使っている。 */
+  --spacing-gutter: 1.5rem;
+  --spacing-gutter-mobile: 1rem;
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2rem;
+
+  /* --- Layout --- */
+  --container-content: 1200px;
+
+  /* --- Elevation ---
+     演出的な影は使わない。境界は 1px の実線が担う。 */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-raised: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+/* 角丸は Tailwind 既定スケールをそのまま使う。
+   カード = rounded-xl (12px) / 入力・ボタン = rounded-lg (8px) / チップ = rounded-full
+   ※ design.md の `rounded:` トークン表は Shapes 節の記述と矛盾しているため、
+     Shapes 節の意図 (カード12px・入力8px) を採用した。 */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* 数字・時刻・金額は Inter の等幅数字で桁を揃える */
+  .numeric {
+    font-family: var(--font-numeric);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* キーボード操作時のみ、2px の藍色リング + 2px の白オフセット */
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
